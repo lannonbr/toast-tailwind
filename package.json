@@ -1,0 +1,39 @@
+{
+  "name": "toast-tailwind",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": "true",
+  "type": "module",
+  "dependencies": {
+    "@sector/breadbox": "^0.0.4",
+    "preact": "^10.5.4",
+    "preact-render-to-string": "^5.1.10",
+    "react-helmet": "^6.1.0",
+    "tailwindcss": "^1.8.11",
+    "toast": "^0.3.8"
+  },
+  "scripts": {
+    "breadbox": "breadbox --dest public/web_modules",
+    "build:css-prod": "NODE_ENV=production tailwindcss build src/styles/style.css --config utils/tailwind.config.js --output public/style.css",
+    "build:css": "tailwindcss build src/styles/style.css --config utils/tailwind.config.js --output public/style.css",
+    "build": "yarn build:css-prod && toast incremental .",
+    "clean": "rm -rf public .tmp && yarn breadbox",
+    "incremental": "toast incremental .",
+    "serve": "npx serve public"
+  },
+  "snowpack": {
+    "exclude": [
+      "public/**"
+    ],
+    "installOptions": {
+      "alias": {
+        "react": "preact/compat"
+      }
+    },
+    "knownEntrypoints": [
+      "preact",
+      "preact/compat",
+      "react-helmet"
+    ]
+  }
+}
